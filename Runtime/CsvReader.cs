@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -13,8 +14,26 @@ namespace Gilzoide.SqliteAsset.Csv
             Tabs,
         }
 
+        /// <summary>
+        /// Parse a stream of CSV-formatted data.
+        /// </summary>
+        /// <param name="stream">Stream of CSV-formatted data.</param>
+        /// <param name="separator">Character used for separating fields.</param>
+        /// <param name="maxFieldSize">Maximum field size allowed.</param>
+        /// <returns>
+        /// The enumeration returns each field's contents, even if it is empty.
+        /// <see langword="null"/> is returned at the end of the lines, meaning a new row will start next.
+        /// Empty lines are ignored and will not be enumerated.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="stream"/> is null.</exception>
+        /// <exception cref="CsvException">Thrown if any field size is greater than <paramref name="maxFieldSize"/>.</exception>
         public static IEnumerable<string> ParseStream(StreamReader stream, SeparatorChar separator = SeparatorChar.Comma, int maxFieldSize = int.MaxValue)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             SkipEmptyLines(stream);
             if (stream.Peek() < 0)
             {
