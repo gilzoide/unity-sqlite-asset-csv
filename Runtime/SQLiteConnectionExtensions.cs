@@ -29,7 +29,7 @@ namespace Gilzoide.SqliteAsset.Csv
                         string joinedColumns = string.Join(", ", columns);
                         if (parsingHeader)
                         {
-                            db.Execute($"CREATE TABLE {tableName} ({joinedColumns})");
+                            db.Execute($"CREATE TABLE IF NOT EXISTS {tableName} ({joinedColumns})");
                             parsingHeader = false;
                         }
                         else
