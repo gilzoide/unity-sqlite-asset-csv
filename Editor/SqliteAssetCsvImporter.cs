@@ -30,10 +30,10 @@ namespace Gilzoide.SqliteAsset.Csv
 
         [Header("CSV options")]
         [Tooltip("Which separator character will be used when parsing the CSV file.")]
-        [SerializeField] private CsvReader.SeparatorChar _csvSeparator = CsvReader.SeparatorChar.Comma;
+        [SerializeField] private CsvReader.SeparatorChar _CSVSeparator = CsvReader.SeparatorChar.Comma;
 
         [Tooltip("If true, the original CSV file will also be imported as a TextAsset")]
-        [SerializeField] private bool _importCsvTextAsset = false;
+        [SerializeField] private bool _importCSVTextAsset = false;
 
         [Header("Additional SQL")]
         [Tooltip("SQL script that will be run before reading CSV data. Use this for configuring the generated database using PRAGMAs like 'page_size'.")]
@@ -53,7 +53,7 @@ namespace Gilzoide.SqliteAsset.Csv
                 {
                     tempDb.Execute(_SQLBeforeReadingCSV);
                 }
-                tempDb.ImportCsvToTable(_tableName, stream, _csvSeparator);
+                tempDb.ImportCsvToTable(_tableName, stream, _CSVSeparator);
                 if (!string.IsNullOrWhiteSpace(_SQLAfterReadingCSV))
                 {
                     tempDb.Execute(_SQLAfterReadingCSV);
@@ -64,7 +64,7 @@ namespace Gilzoide.SqliteAsset.Csv
             ctx.AddObjectToAsset("sqlite", asset);
             ctx.SetMainObject(asset);
 
-            if (_importCsvTextAsset)
+            if (_importCSVTextAsset)
             {
                 var textAsset = new TextAsset(File.ReadAllText(assetPath))
                 {
