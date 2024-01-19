@@ -15,6 +15,12 @@ namespace Gilzoide.SqliteAsset.Csv
 
         public static IEnumerable<string> ParseStream(StreamReader stream, SeparatorChar separator = SeparatorChar.Comma, int maxFieldSize = int.MaxValue)
         {
+            SkipEmptyLines(stream);
+            if (stream.Peek() < 0)
+            {
+                yield break;
+            }
+
             bool insideQuotes = false;
             var stringBuilder = new StringBuilder();
             while (true)
@@ -39,6 +45,12 @@ namespace Gilzoide.SqliteAsset.Csv
                             yield return stringBuilder.ToString();
                             stringBuilder.Clear();
                             yield return null;
+
+                            SkipEmptyLines(stream);
+                            if (stream.Peek() < 0)
+                            {
+                                yield break;
+                            }
                         }
                         else
                         {
@@ -106,6 +118,24 @@ namespace Gilzoide.SqliteAsset.Csv
                         }
                         stringBuilder.Append((char) c);
                         break;
+                }
+            }
+        }
+
+        private static void SkipEmptyLines(StreamReader streamReader)
+        {
+            while (true)
+            {
+                int c = streamReader.Peek();
+                switch (c)
+                {
+                    case '\n':
+                    case '\r':
+                        streamReader.Read();
+                        continue;
+
+                    default:
+                        return;
                 }
             }
         }
