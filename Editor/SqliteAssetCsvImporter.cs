@@ -35,6 +35,13 @@ namespace Gilzoide.SqliteAsset.Csv
         [Tooltip("If true, the original CSV file will also be imported as a TextAsset")]
         [SerializeField] private bool _importCsvTextAsset = false;
 
+        [Header("Additional SQL")]
+        [Tooltip("SQL script that will be run before reading CSV data. Use this for configuring the generated database using PRAGMAs like 'page_size'.")]
+        [SerializeField, Multiline] private string _SQLBeforeReadingCSV = "";
+
+        [Tooltip("SQL script that will be run after reading CSV data. Use this for changing the table's schema, creating indices, etc.")]
+        [SerializeField, Multiline] private string _SQLAfterReadingCSV = "";
+
         public override void OnImportAsset(AssetImportContext ctx)
         {
             SqliteAsset asset;
@@ -42,7 +49,16 @@ namespace Gilzoide.SqliteAsset.Csv
             using (var file = File.OpenRead(assetPath))
             using (var stream = new StreamReader(file))
             {
+                if (!string.IsNullOrWhiteSpace(_SQLBeforeReadingCSV))
+                {
+                    tempDb.Execute(_SQLBeforeReadingCSV);
+                }
                 tempDb.ImportCsvToTable(_tableName, stream, _csvSeparator);
+                if (!string.IsNullOrWhiteSpace(_SQLAfterReadingCSV))
+                {
+                    tempDb.Execute(_SQLAfterReadingCSV);
+                }
+
                 asset = tempDb.SerializeToAsset(_openFlags, _storeDateTimeAsTicks, _streamingAssetsPath);
             }
             ctx.AddObjectToAsset("sqlite", asset);
