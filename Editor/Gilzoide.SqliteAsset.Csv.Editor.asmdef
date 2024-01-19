@@ -1,0 +1,20 @@
+{
+    "name": "Gilzoide.SqliteAsset.Csv.Editor",
+    "rootNamespace": "Gilzoide.SqliteAsset.Csv.Editor",
+    "references": [
+        "Gilzoide.SqliteNet",
+        "Gilzoide.SqliteAsset",
+        "Gilzoide.SqliteAsset.Csv"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
