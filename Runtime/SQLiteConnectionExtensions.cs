@@ -18,7 +18,7 @@ namespace Gilzoide.SqliteAsset.Csv
         /// <param name="maxFieldSize">Maximum field size allowed.</param>
         /// <exception cref="ArgumentNullException">Thrown if any of <paramref name="db"/>, <paramref name="tableName"/> and <paramref name="csvStream"/> are null.</exception>
         /// <exception cref="CsvException">Thrown if an error is found while parsing the CSV data.</exception>
-        public static void ImportCsvToTable(this SQLiteConnection db, string tableName, StreamReader csvStream, CsvReader.SeparatorChar separator = CsvReader.SeparatorChar.Comma, int maxFieldSize = int.MaxValue)
+        public static void ImportCsvToTable(this SQLiteConnection db, string tableName, TextReader csvStream, CsvReader.SeparatorChar separator = CsvReader.SeparatorChar.Comma, int maxFieldSize = int.MaxValue)
         {
             if (db == null)
             {

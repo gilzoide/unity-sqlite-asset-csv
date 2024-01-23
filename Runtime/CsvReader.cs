@@ -27,7 +27,7 @@ namespace Gilzoide.SqliteAsset.Csv
         /// </returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="stream"/> is null.</exception>
         /// <exception cref="CsvException">Thrown if any field size is greater than <paramref name="maxFieldSize"/>.</exception>
-        public static IEnumerable<string> ParseStream(StreamReader stream, SeparatorChar separator = SeparatorChar.Comma, int maxFieldSize = int.MaxValue)
+        public static IEnumerable<string> ParseStream(TextReader stream, SeparatorChar separator = SeparatorChar.Comma, int maxFieldSize = int.MaxValue)
         {
             if (stream == null)
             {
@@ -141,7 +141,7 @@ namespace Gilzoide.SqliteAsset.Csv
             }
         }
 
-        private static void SkipEmptyLines(StreamReader streamReader)
+        private static void SkipEmptyLines(TextReader streamReader)
         {
             while (true)
             {
