@@ -1,7 +1,7 @@
 {
   "name": "com.gilzoide.sqlite-asset.csv",
   "displayName": "SQLite Asset - CSV",
-  "version": "1.0.0-preview1",
+  "version": "1.0.0-preview2",
   "description": "Easily import \".csv\" files as read-only SQLite database assets.",
   "homepage": "https://github.com/gilzoide/unity-sqlite-asset-csv",
   "license": "Unlicense",
@@ -9,8 +9,8 @@
     "name": "Gil Barbosa Reis"
   },
   "dependencies": {
-    "com.gilzoide.sqlite-asset": "1.0.0-preview1",
-    "com.gilzoide.sqlite-net": "1.0.0-preview4"
+    "com.gilzoide.sqlite-asset": "1.0.0-preview2",
+    "com.gilzoide.sqlite-net": "1.0.0-preview6"
   },
   "unity": "2017.3"
 }
