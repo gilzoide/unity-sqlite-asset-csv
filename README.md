@@ -1,6 +1,8 @@
 # SQLite Asset - CSV
 [![openupm](https://img.shields.io/npm/v/com.gilzoide.sqlite-asset.csv?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.gilzoide.sqlite-asset.csv/)
 
+> **Warning**: this package is deprecated, since SQLite-net incorporated the functionality of this package.
+
 Easily import ".csv" files as read-only [SQLite database assets](https://github.com/gilzoide/unity-sqlite-asset).
 
 
